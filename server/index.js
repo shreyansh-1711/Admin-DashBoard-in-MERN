@@ -1,32 +1,47 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';  // for mongoDB access     
-import cors from 'cors'; // for making cross-version request
-import dotenv from 'dotenv'; // to use env files (enviourment variable)
-import helmet from 'helmet'; // use to secure http headers / safety
-import morgan from 'morgan'; // mainly a middleware used for login 
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import helmet from "helmet";
+import morgan from "morgan";
 import clientRoutes from "./routes/client.js";
 import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
 
 
-
+/* CONFIGURATION */
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy : "cross-origin" }));
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded ({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-
-// Routes 
+/* ROUTES */
 app.use("/client", clientRoutes);
-app.use("/general" , generalRoutes);
+app.use("/general", generalRoutes);
 app.use("/management", managementRoutes);
 app.use("/sales", salesRoutes);
 
 
+/* MONGOOSE SETUP */
+const PORT = process.env.PORT || 9000;
+mongoose.set('strictQuery', true);
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+
+    /* ADD DATA ONE TIME */
+    // User.insertMany(users);
+    // Post.insertMany(posts);
+  })
+  .catch((error) => console.log(`${error} did not connect`));
