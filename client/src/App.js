@@ -18,8 +18,8 @@ function App() {
         <CssBaseline />  {/*CssBaseline is sort of css reset added to the <head /> of your document.  */}
           <Routes>
             <Route element = { <Layout /> }>
-              <Route path="/" element={<Navigate to="/dashboard" replace /> } />
-              <Route path="/dashboard" element={<Dashboard /> } />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard" element={<Dashboard />} />
             </Route>
           </Routes>
       </ThemeProvider>

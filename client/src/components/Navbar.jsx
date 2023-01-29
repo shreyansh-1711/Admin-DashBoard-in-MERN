@@ -12,11 +12,16 @@ import { useDispatch } from "react-redux";
 import { setMode } from "state";
 import profileImage from "assets/shreyansh.jpg";
 import {
-  useTheme,
-  Toolbar,
   AppBar,
+  Button,
+  Box,
+  Typography,
   IconButton,
   InputBase,
+  Toolbar,
+  Menu,
+  MenuItem,
+  useTheme,
 } from "@mui/material";
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
@@ -26,13 +31,13 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <AppBar
       sx={{
-        positiom: "static",
+        position: "static",
         background: "none",
         boxShadow: "none",
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        {/* Left Side  */}
+        {/* LEFT SIDE */}
         <FlexBetween>
           <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
@@ -50,7 +55,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
           </FlexBetween>
         </FlexBetween>
 
-        {/* Right Side  */}
+        {/* RIGHT SIDE */}
         <FlexBetween gap="1.5rem">
           <IconButton onClick={() => dispatch(setMode())}>
             {theme.palette.mode === "dark" ? (
@@ -62,6 +67,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
           <IconButton>
             <SettingsOutlined sx={{ fontSize: "25px" }} />
           </IconButton>
+
         </FlexBetween>
       </Toolbar>
     </AppBar>
