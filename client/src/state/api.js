@@ -8,11 +8,8 @@ export const api = createAPI({
         getUser: build.query({
             query: (id) => `general/user/${id}`,
             provideTags: ["User"],
-
-
         })
     })
-
 
 })
 
