@@ -4,12 +4,17 @@ export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
     reducerPath: "adminApi",
     tagTypes: [
-      "User",
+        "User",
+        "Products"
     ],
     endpoints: (build) => ({
         getUser: build.query({
-          query: (id) => `general/user/${id}`,
-          providesTags: ["User"],
+            query: (id) => `general/user/${id}`,
+            providesTags: ["User"],
+        }),
+        getProducts: build.query({
+            query: () => "client/products",
+            providesTags: ["Product"],
         }),
     }),
 
@@ -18,4 +23,5 @@ export const api = createApi({
 export const {
     // use is prefix and Query is posfix 
     useGetUserQuery,
+    useGetProductsQuery
 } = api;
