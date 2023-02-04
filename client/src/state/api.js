@@ -7,6 +7,7 @@ export const api = createApi({
         "User",
         "Products",
         "customers",
+        "Transactions"
     ],
     endpoints: (build) => ({
         getUser: build.query({
@@ -21,6 +22,14 @@ export const api = createApi({
             query: () => "client/customers",
             providesTags: ["Customer"],
         }),
+        getTransactions: build.query({
+            query: ({ page, pageSize, sort, search }) => ({
+                url: "client/transactions",
+                method: "GET",
+                params: { page, pageSize, sort, search },
+            }),
+            providesTags: ["Transactions"],
+        }),
     }),
 
 });
@@ -29,5 +38,6 @@ export const {
     // use is prefix and Query is posfix 
     useGetUserQuery,
     useGetProductsQuery,
-    useGetCustomersQuery
+    useGetCustomersQuery,
+    useGetTransactionsQuery,
 } = api;

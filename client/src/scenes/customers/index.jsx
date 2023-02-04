@@ -88,6 +88,8 @@ const Customers = () => {
             getRowId={(row)=> row._id} 
             rows={data || []}
             columns={columns}
+            
+
             />
         </Box>
     </Box>
