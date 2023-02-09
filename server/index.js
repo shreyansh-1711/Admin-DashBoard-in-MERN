@@ -58,6 +58,8 @@ mongoose
     // AffiliateStat.insertMany(dataAffiliateStat);
 
   })
+
+  
   .catch((error) => console.log(`${error} did not connect`));
 
   
